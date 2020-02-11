@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+  web:
+    volumes:
+      - .:/home/jovyan/work
+      - ~/.aws:/home/jovyan/.aws
+    expose:
+      - 8888
+    build:
+      context: .
+      dockerfile: Dockerfile.jupyter
+      args:
+        aws_profile: ${AWS_PROFILE}
+    ports:
+      - "8888:8888"
+    labels:
+      - "maintainer=Joshua Durham <jpdurham@user.noreply.github.com>"
+    image: jupyter-base:latest
+

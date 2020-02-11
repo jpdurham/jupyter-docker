@@ -1,0 +1,6 @@
+name: base
+dependencies:
+  -  pandas
+  -  numpy
+  -  sagemaker-python-sdk
+  -  matplotlib

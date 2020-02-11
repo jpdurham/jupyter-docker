@@ -1,0 +1,19 @@
+ARG BASE_CONTAINER=jupyter/minimal-notebook
+FROM $BASE_CONTAINER
+
+LABEL maintainer="Joshua Durham <jpdurham@users.noreply.github.com>"
+
+COPY environment.yml /tmp/
+RUN conda env update --file /tmp/environment.yml && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER
+
+ENV JUPYTER_ENABLE_LAB yes
+ARG aws_profile=default
+ENV AWS_PROFILE $aws_profile
+
+# How to use:
+# docker build . -t pkl:latest && docker run -it --rm -p 8888:8888 -v "$PWD":/home/jovyan/work pk
+# or just use the docker compose yaml
+
+# (Jovyan is an inhabitant of, you guessed it, Jupiter)
